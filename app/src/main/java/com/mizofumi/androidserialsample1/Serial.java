@@ -42,6 +42,14 @@ public class Serial {
         }
     }
 
+    public Set<BluetoothDevice> getDevices(){
+        return mAdapter.getBondedDevices();
+    }
+
+    public void setDevice(BluetoothDevice mDevice) {
+        this.mDevice = mDevice;
+    }
+
     public void setSerialListener(SerialListener serialListener) {
         this.serialListener = serialListener;
     }
