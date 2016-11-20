@@ -68,7 +68,6 @@ public class Serial {
         if (serialListener == null){
             throw new NullPointerException("SerialListenerが定義されていません");
         }
-
         new Thread(new Runnable() {
             String readMsg;
 
@@ -122,6 +121,45 @@ public class Serial {
         } catch (IOException e) {
             e.printStackTrace();
             serialListener.close_failed("IOエラー:"+e.getMessage());
+        }
+    }
+
+    public void write(byte[] bytes) throws NullPointerException{
+        if (serialListener == null){
+            throw new NullPointerException("SerialListenerが定義されていません");
+        }
+        try {
+            mmOutputStream.write(bytes);
+            serialListener.write_success();
+        } catch (IOException e) {
+            e.printStackTrace();
+            serialListener.write_failed("IOエラー:"+e.getMessage());
+        }
+    }
+
+    public void write(byte[] bytes,int offset,int length) throws NullPointerException{
+        if (serialListener == null){
+            throw new NullPointerException("SerialListenerが定義されていません");
+        }
+        try {
+            mmOutputStream.write(bytes,offset,length);
+            serialListener.write_success();
+        } catch (IOException e) {
+            e.printStackTrace();
+            serialListener.write_failed("IOエラー:"+e.getMessage());
+        }
+    }
+
+    public void write(int b) throws NullPointerException{
+        if (serialListener == null){
+            throw new NullPointerException("SerialListenerが定義されていません");
+        }
+        try {
+            mmOutputStream.write(b);
+            serialListener.write_success();
+        } catch (IOException e) {
+            e.printStackTrace();
+            serialListener.write_failed("IOエラー:"+e.getMessage());
         }
     }
 
